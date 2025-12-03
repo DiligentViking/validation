@@ -1,7 +1,7 @@
 {
-  "name": "efficientus",
+  "name": "validation",
   "version": "1.0.0",
-  "description": "<h1 align=\"center\"> 📜 Efficientus 📜 <h1>",
+  "description": "Danger. Danger. Danger. Exit Now.",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DiligentViking/efficientus.git"
+    "url": "git+https://github.com/DiligentViking/validation.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DiligentViking/efficientus/issues"
+    "url": "https://github.com/DiligentViking/validation/issues"
   },
-  "homepage": "https://github.com/DiligentViking/efficientus#readme",
+  "homepage": "https://github.com/DiligentViking/validation#readme",
   "devDependencies": {
     "css-loader": "^7.1.2",
     "html-loader": "^5.1.0",
