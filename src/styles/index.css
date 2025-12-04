@@ -55,7 +55,7 @@ h1 {
 
 input,
 select {
-  background-color: transparent !important;
+  background-color: transparent;
   color: var(--dull-neon-green);
   appearance: none;
   caret-color: var(--dull-neon-green);
