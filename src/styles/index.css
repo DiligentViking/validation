@@ -1,0 +1,75 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --neon-green: rgb(220, 255, 168);
+  --dull-neon-green: rgb(220, 255, 168, 0.75);
+  --duller-neon-green: rgb(220, 255, 168, 0.5);
+  --neon-blue: rgb(220, 220, 240);
+}
+
+body {
+  background-color: black;
+  color: var(--neon-green);
+  width: 100vw;
+  height: 100vh;
+}
+
+* {
+  font-size: 1rem;
+}
+
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+h1 {
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+.input-row:nth-of-type(1) {
+  gap: 0.5rem;
+}
+.input-row:nth-of-type(2) {
+  gap: 0.5rem;
+}
+
+.input-row + .input-row {
+  margin-top: 0.25rem;
+}
+
+input,
+select {
+  background-color: transparent !important;
+  color: var(--dull-neon-green);
+  appearance: none;
+  caret-color: var(--dull-neon-green);
+  font-size: 0.875rem;
+  border: 1px solid var(--duller-neon-green);
+  padding: 0 0.125rem;
+  width: 10rem;
+  height: 1.125rem;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  color: var(--neon-green);
+  border: 1px solid var(--dull-neon-green);
+  transition: color 0.25s linear, border 0.25s linear;
+}
