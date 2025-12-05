@@ -24,7 +24,7 @@ validatorSubmit.addEventListener('click', () => {
   for (const animatingElem of Object.keys(animsToBeCleared)) {
     waitForAnimsToComplete = 1.375;
     clearInterval(animsToBeCleared[animatingElem]);
-    delete animsToBeCleared['email'];
+    delete animsToBeCleared[animatingElem];
   }
 
   setTimeout(() => {
