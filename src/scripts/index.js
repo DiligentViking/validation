@@ -7,7 +7,13 @@ const confirmation = validator.querySelector('#confirmation');
 
 const animsToBeCleared = {};
 
-window.addEventListener('input', (e) => {
+
+validator.addEventListener('input', (e) => {validateValidatorField(e)});
+
+validator.addEventListener('focusout', (e) => {validateValidatorField(e)});
+
+
+function validateValidatorField(e) {
   switch (e.target.id) {
     case 'email':
       console.log(e.target.validity);
@@ -23,7 +29,7 @@ window.addEventListener('input', (e) => {
       }
       break;
   }
-});
+}
 
 
 function startInvalidAnim(elem) {
