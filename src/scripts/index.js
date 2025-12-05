@@ -7,6 +7,13 @@ const confirmation = validator.querySelector('#confirmation');
 
 const animsToBeCleared = {};
 
+const zipcodePatterns = {
+  'United States': /^\d\d\d\d\d(-\d\d\d\d)?$/,
+  'Canada': /^\w\d\w \w\d\w$/,
+  'Bulgaria': /^\d\d\d\d$/,
+  'Bohemia': /^\d\d\d \d\d$/
+};
+
 
 validator.addEventListener('input', (e) => {validateValidatorField(e)});
 
@@ -16,16 +23,26 @@ validator.addEventListener('focusout', (e) => {validateValidatorField(e)});
 function validateValidatorField(e) {
   switch (e.target.id) {
     case 'email':
-      console.log(e.target.validity);
       if (e.target.validity.typeMismatch || !e.target.value) {
-        console.log('startin');
         if (!animsToBeCleared['email']) {
-          animsToBeCleared['email'] = startInvalidAnim(e.target);
+          animsToBeCleared['email'] = startInvalidAnim(email);
         }
       } else {
-        console.log(animsToBeCleared['email']);
         clearInterval(animsToBeCleared['email']);
         delete animsToBeCleared['email'];
+      }
+      break;
+
+    case 'country':
+    case 'zipcode':
+      const regex = zipcodePatterns[country.value];
+      if (!regex.exec(zipcode.value) || !e.target.value) {
+        if (!animsToBeCleared['zipcode']) {
+          animsToBeCleared['zipcode'] = startInvalidAnim(zipcode);
+        }
+      } else {
+        clearInterval(animsToBeCleared['zipcode']);
+        delete animsToBeCleared['zipcode'];
       }
       break;
   }
