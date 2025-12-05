@@ -45,6 +45,17 @@ function validateValidatorField(e) {
         delete animsToBeCleared['zipcode'];
       }
       break;
+
+    case 'password':
+      if (!e.target.value) {
+        if (!animsToBeCleared['password']) {
+          animsToBeCleared['password'] = startInvalidAnim(password);
+        }
+      } else {
+        clearInterval(animsToBeCleared['password']);
+        delete animsToBeCleared['password'];
+      }
+      break;
   }
 }
 
