@@ -4,6 +4,7 @@ const country = validator.querySelector('#country');
 const zipcode = validator.querySelector('#zipcode');
 const password = validator.querySelector('#password');
 const confirmation = validator.querySelector('#confirmation');
+const validatorSubmit = validator.querySelector('.validator-submit');
 
 const animsToBeCleared = {};
 
@@ -14,21 +15,44 @@ const zipcodePatterns = {
   'Bohemia': /^\d\d\d \d\d$/
 };
 
+let validatorValid = false;
 let confirmationHasBeenFocused  = false;
 
 
-validator.addEventListener('input', (e) => {validateValidatorField(e)});
+validatorSubmit.addEventListener('click', () => {
+  let waitForAnimsToComplete = 0;
+  for (const animatingElem of Object.keys(animsToBeCleared)) {
+    waitForAnimsToComplete = 1.375;
+    clearInterval(animsToBeCleared[animatingElem]);
+    delete animsToBeCleared['email'];
+  }
 
-validator.addEventListener('focusout', (e) => {validateValidatorField(e)});
+  setTimeout(() => {
+    validatorValid = true;
+    validateValidatorField(email);
+    validateValidatorField(country);
+    validateValidatorField(zipcode);
+    validateValidatorField(password);
+    confirmationHasBeenFocused = true;
+    validateValidatorField(confirmation);
+
+    if (validatorValid) validator.classList.add('validation-complete');
+  }, waitForAnimsToComplete * 1000);
+});
+
+validator.addEventListener('input', (e) => {validateValidatorField(e.target)});
+
+validator.addEventListener('focusout', (e) => {validateValidatorField(e.target)});
 
 
-function validateValidatorField(e) {
-  switch (e.target.id) {
+function validateValidatorField(target) {
+  switch (target.id) {
     case 'email':
-      if (e.target.validity.typeMismatch || !e.target.value) {
+      if (email.validity.typeMismatch || !email.value) {
         if (!animsToBeCleared['email']) {
           animsToBeCleared['email'] = startInvalidAnim(email);
         }
+        validatorValid = false;
       } else {
         clearInterval(animsToBeCleared['email']);
         delete animsToBeCleared['email'];
@@ -38,10 +62,11 @@ function validateValidatorField(e) {
     case 'country':
     case 'zipcode':
       const regex = zipcodePatterns[country.value];
-      if (!regex.exec(zipcode.value) || !e.target.value) {
+      if (!regex.exec(zipcode.value) || !zipcode.value) {
         if (!animsToBeCleared['zipcode']) {
           animsToBeCleared['zipcode'] = startInvalidAnim(zipcode);
         }
+        validatorValid = false;
       } else {
         clearInterval(animsToBeCleared['zipcode']);
         delete animsToBeCleared['zipcode'];
@@ -49,10 +74,11 @@ function validateValidatorField(e) {
       break;
 
     case 'password':
-      if (!e.target.value) {
+      if (!password.value) {
         if (!animsToBeCleared['password']) {
           animsToBeCleared['password'] = startInvalidAnim(password);
         }
+        validatorValid = false;
       } else {
         clearInterval(animsToBeCleared['password']);
         delete animsToBeCleared['password'];
@@ -63,6 +89,7 @@ function validateValidatorField(e) {
         if (!animsToBeCleared['confirmation']) {
           animsToBeCleared['confirmation'] = startInvalidAnim(confirmation);
         }
+        validatorValid = false;
       } else {
         clearInterval(animsToBeCleared['confirmation']);
         delete animsToBeCleared['confirmation'];
@@ -84,6 +111,7 @@ function startInvalidAnim(elem) {
   };
 
   elem.animate(keyframes, animOptions);
+  console.log(animsToBeCleared);
   return setInterval(() => {
     elem.animate(keyframes, animOptions);
   }, 1.375 * 1000);

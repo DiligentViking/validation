@@ -30,6 +30,14 @@ form {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transform-origin: left;
+  /* scale: 2; */
+  transition: scale 1.5s ease-in-out, opacity 1.5s ease-in-out;
+}
+
+form.validation-complete {
+  scale: 1.5;
+  opacity: 0;
 }
 
 
@@ -72,4 +80,31 @@ select:focus {
   color: var(--neon-green);
   border: 1px solid var(--dull-neon-green);
   transition: color 0.25s linear, border 0.25s linear;
+}
+
+.validator-submit {
+  background-color: var(--dull-neon-green);
+  color: black;
+  font-family: inherit;
+  font-size: 0.8rem;
+  border: none;
+  outline: 1px solid black;
+  padding: 0.0625rem 0.25rem;
+  display: block;
+  margin-left: 4.5rem;
+  margin-top: 1rem;
+  transition: background-color 1s ease, color 1s ease, outline 1s ease;
+}
+
+.validator-submit:hover {
+  background-color: transparent;
+  color: var(--dull-neon-green);
+  outline: 1px solid var(--dull-neon-green);
+}
+
+.validator-submit:active {
+  background-color: transparent;
+  color: var(--neon-green);
+  outline: 1px solid var(--neon-green);
+  transition: background-color 0.25s ease, color 0.25s ease, outline 0.25s ease;
 }
