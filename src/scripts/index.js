@@ -55,6 +55,15 @@ function validateValidatorField(e) {
         clearInterval(animsToBeCleared['password']);
         delete animsToBeCleared['password'];
       }
+    case 'confirmation':
+      if (password.value !== confirmation.value || !confirmation.value) {
+        if (!animsToBeCleared['confirmation']) {
+          animsToBeCleared['confirmation'] = startInvalidAnim(confirmation);
+        }
+      } else {
+        clearInterval(animsToBeCleared['confirmation']);
+        delete animsToBeCleared['confirmation'];
+      }
       break;
   }
 }
