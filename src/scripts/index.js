@@ -14,6 +14,8 @@ const zipcodePatterns = {
   'Bohemia': /^\d\d\d \d\d$/
 };
 
+let confirmationHasBeenFocused  = false;
+
 
 validator.addEventListener('input', (e) => {validateValidatorField(e)});
 
@@ -56,6 +58,7 @@ function validateValidatorField(e) {
         delete animsToBeCleared['password'];
       }
     case 'confirmation':
+      if (!confirmationHasBeenFocused) return;
       if (password.value !== confirmation.value || !confirmation.value) {
         if (!animsToBeCleared['confirmation']) {
           animsToBeCleared['confirmation'] = startInvalidAnim(confirmation);
@@ -85,3 +88,12 @@ function startInvalidAnim(elem) {
     elem.animate(keyframes, animOptions);
   }, 1.375 * 1000);
 }
+
+
+// trivial: confirmation can only glow after it has been focused once
+
+confirmation.addEventListener('focus', function handler() {
+  console.log('focus');
+  confirmationHasBeenFocused  = true;
+  confirmation.removeEventListener('focus', handler);
+});
